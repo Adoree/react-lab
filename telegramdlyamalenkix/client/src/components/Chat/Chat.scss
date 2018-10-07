@@ -1,0 +1,77 @@
+@import "sass/colors.scss";
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+
+    &--not-selected {
+        background-color: #eef0ee;
+        height: 100%;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__delete {
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .chat-info {
+        height: 80px;
+        background-color: $dark-mint;
+        border-radius: 10px;
+        padding: 10px;
+        color: white;
+        position: relative;
+
+        &__image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        &__title {
+            margin-left: 20px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        &__status {
+            font-size: 14px;
+            position: absolute;
+            bottom: 10px;
+            left: 90px;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .messages-list {
+        background-color: white;
+        border-radius: 10px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+
+
+
+.inform-message {
+    background-color: #c9cdcb;
+    padding: 10px;
+    color: white;
+    border-radius: 20px;
+}

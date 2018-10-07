@@ -1,0 +1,54 @@
+@import "../../sass/colors.scss";
+
+.conversations-list {
+    background-color: white;
+    border-radius: 10px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    height: 100%;
+
+    .conversation {
+        padding: 10px 30px;
+        border-bottom: 1px solid $mint;
+
+        &--active {
+            background-color: #e7e9e7;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background-color: #e7e9e7;
+        }
+
+        &__image {
+            border-radius: 50%;
+            height: 70px;
+            width: 70px;
+
+            &--online {
+                border: 6px solid green;
+            }
+
+            &--offline {
+                border: 6px solid grey;
+            }
+        }
+
+        &__title {
+            color: $dark-green;
+            margin-left: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        &__notification {
+            display: inline-block;
+            background-color: #e89e98;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+        }
+    }
+}

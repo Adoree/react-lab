@@ -71,7 +71,7 @@ export default handleActions({
                 [action.payload.conversationId]: {
                     ...state.conversations[action.payload.conversationId],
                     newMessages: true,
-                    messages: state.conversations[action.payload.conversationId].messages.concat(action.payload)
+                    messages: state.conversations[action.payload.conversationId].messages.concat(action.payload),
                 }
             }
         }
@@ -83,7 +83,7 @@ export default handleActions({
                 ...state.conversations,
                 [action.payload.conversationId]: {
                     ...state.conversations[action.payload.conversationId],
-                    messages: state.conversations[action.payload.conversationId].messages.concat(action.payload)
+                    messages: state.conversations[action.payload.conversationId].messages.concat(action.payload),
                 }
             }
         }
@@ -106,9 +106,16 @@ export default handleActions({
         };
     },
     [deleteMessageSuccess]: (state, action) => {
-        const copy = JSON.parse(JSON.stringify(state));
-        copy.conversations[action.payload.conversationId].messages = copy.conversations[action.payload.conversationId].messages.filter(m => m._id !== action.payload._id);
-        return copy;
+        return {
+            ...state,
+            conversations: {
+                ...state.conversations,
+                [action.payload.conversationId]: {
+                    ...state.conversations[action.payload.conversationId],
+                    messages: state.conversations[action.payload.conversationId].messages.filter(m => m._id !== action.payload._id),
+                }
+            }
+        }
     },
     [deleteConversationSuccess]: (state, action) => {
         return {
@@ -143,7 +150,7 @@ export default handleActions({
                     ...state.conversations[action.payload.id],
                     isFetching: false,
                     page: state.conversations[action.payload.id].page + 1,
-                    messages: state.conversations[action.payload.id].messages.reverse().concat(action.payload.data).reverse(),
+                    messages: state.conversations[action.payload.id].messages.slice().reverse().concat(action.payload.data).reverse(),
                 }
             }
         }

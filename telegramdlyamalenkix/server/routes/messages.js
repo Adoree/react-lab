@@ -12,12 +12,16 @@ router.use(bodyParser.json());
 
 const users = {};
 
-router.get('/all/:conversationId', checkAuth, (req, res) => {
+router.get('/all/:conversationId', checkAuth, async (req, res) => {
     const { offset } = req.query;
     const { conversationId } = req.params;
     const limit = 10;
+
+    const userId = req.userId;
+    const user = await User.findById(userId);
+
     Messages
-        .find({conversationId, available: req.userId})
+        .find({conversationId, available: req.userId, createdAt: { $lt: user.updatedAt }})
         .sort("-createdAt")
         .limit(limit)
         .skip(limit * offset)

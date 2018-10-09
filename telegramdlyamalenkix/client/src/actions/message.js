@@ -56,7 +56,6 @@ export const getMessagesFailure = createAction('[Message] Get messages failure')
 export const getMessages = (id, page) => (dispatch) => {
     dispatch(requestMessages(id));
     const token = localStorage.getItem('token');
-
     return fetch(`http://localhost:5000/messages/all/${id}?offset=${page}`, {
         method: 'get',
         headers: {
@@ -67,4 +66,4 @@ export const getMessages = (id, page) => (dispatch) => {
     .then(res => res.json())
     .then(data => dispatch(getMessagesSuccess({ id, data })))
     .catch(err => dispatch(getMessagesFailure({ id, err })));
-}
+};

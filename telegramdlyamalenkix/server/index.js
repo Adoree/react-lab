@@ -61,7 +61,7 @@ io.on('connection', socket => {
         const keys = Object.keys(users);
         conversation.participants.forEach(c => {
             keys.forEach(id => {
-                if (users[id] === c) {
+                if (users[id] === c._id) {
                     io.to(id).emit('CONVERSATION_RECEIVE', conversation);
                 }
             })

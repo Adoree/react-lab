@@ -43,6 +43,7 @@ class MessageSendBoxContainer extends PureComponent {
         const { message } = this.state;
         if (!this.state.message.text.trim()) return;
         const  { addMessage, conversationId, userId, companion } = this.props;
+        console.log(companion);
         addMessage(message.text, conversationId, userId, companion);
         this.setState({
             message: {

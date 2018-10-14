@@ -65,12 +65,15 @@ router.post('/create', checkAuth, (req, res) => {
     const { participants, title, image, author } = req.body;
     const { userId } = req;
     User.find({_id: {$in: participants}})
-        .then((users) => Conversation.create({
-            participants: users.map((user) => user._id),
-            title,
-            image,
-            author: userId,
-        }))
+        .then(async (users) => Conversation.create({
+                participants: users.map((user) => user._id),
+                title,
+                image,
+                author: userId,
+            })
+            // return { users, conversation }
+        )
+        .then(a => Conversation.findById(a._id).populate({ path: 'participants', select: '-password' }))
         .then(c => Message.find({ conversationId: c._id, available: userId}).then(messages => {
             return {
                 title: c.title,

@@ -60,17 +60,20 @@ router.post('/create', checkAuth, (req, res) => {
                                     title: companion.nickname,
                                     image: companion.image,
                                     online: companion.online,
+                                    email: companion.email,
+                                    updatedAt: companion.updatedAt,
                                 })
                             }
-                            console.log(conversation.participants.some(p => p.toString() === users[k] && users[k] === companionId));
+
                             if (conversation.participants.some(p => p.toString() === users[k] && users[k] === companionId)) {
-                                console.log(1);
                                 req.io.to(k).emit('CONVERSATION_RECEIVE', {
                                     _id: conversation._id,
                                     messages: [],
                                     title: author.nickname,
                                     image: author.image,
                                     online: author.online,
+                                    email: author.email,
+                                    updatedAt: author.updatedAt,
                                 })
                             }
                         });
@@ -80,7 +83,6 @@ router.post('/create', checkAuth, (req, res) => {
             return conversation;
         })
         .then((conversation) => {
-            console.log(3, conversation._id);
             return Messages.create({
                 conversationId: conversation._id,
                 author: authorId,

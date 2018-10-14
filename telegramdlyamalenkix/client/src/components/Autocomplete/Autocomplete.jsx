@@ -10,7 +10,7 @@ const Autocomplete = ({
 }) => (
     <div className="search">
         <input type="search" value={searchValue} onChange={handleChange} className='form-control' placeholder='Type email here...'/>
-        {!!searchedUsers.length &&
+        {searchValue && !!searchedUsers.length &&
             <ul className="search__users">
                 {searchedUsers.map(user => (
                     <li key={user._id} onClick={() => selectUser(user)} className="search__user">

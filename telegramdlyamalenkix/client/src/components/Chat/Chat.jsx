@@ -29,7 +29,9 @@ class Chat extends Component {
             return chosenUser.online ? 'online' : `last seen at ${new Date(chosenUser.updatedAt).toLocaleString()}`;
         }
 
-        if (!conversation.participants) return;
+        if (!conversation.participants) {
+            return conversation.online ? "online" : `last seen at ${new Date(conversation.updatedAt).toLocaleString()}`;
+        };
 
         const companion = conversation.participants.filter(item => item._id !== userId)[0];
         return companion.online ? "online" : `last seen at ${new Date(companion.updatedAt).toLocaleString()}`;
@@ -69,7 +71,9 @@ class Chat extends Component {
             return chosenUser.email;
         }
 
-        if (!conversation.participants) return;
+        if (!conversation.participants) {
+            return conversation.email;
+        };
 
         const companion = conversation.participants.filter(item => item._id !== userId)[0];
         return companion.email;

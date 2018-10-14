@@ -17,8 +17,8 @@ export const deleteMessage = (id) => (dispatch) => {
     .catch(err => dispatch(deleteMessageFailure(err)))
 };
 
-export const addMessage  = (text, conversationId, authorId, companionId) => (dispatch) => {
-    console.log(text, conversationId, authorId, companionId);
+export const addMessage  = (text, conversationId, authorId, companion) => (dispatch) => {
+    console.log(text, conversationId, authorId, companion);
     const token = localStorage.getItem('token');
     dispatch(addMessageStarted());
     fetch(`http://localhost:5000/messages/create`, {
@@ -27,7 +27,7 @@ export const addMessage  = (text, conversationId, authorId, companionId) => (dis
             text,
             conversationId,
             authorId,
-            companionId
+            companion
         }),
         headers: {
             'access-token': token,
